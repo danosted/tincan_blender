@@ -54,7 +54,7 @@ EXPORT_DIR = os.path.join(REPO_ROOT, "exports", "Props", "Crate")
 # relation to the "v1"/"v2" render-iteration notes in this file's docstring,
 # which just narrate this script's own history.
 PACKAGE_NAME = "com.tincan.props.crate"
-PACKAGE_VERSION = "0.1.0"
+PACKAGE_VERSION = "0.1.1"
 PACKAGE_DISPLAY_NAME = "Crate (Aether Crystal Supply)"
 PACKAGE_DESCRIPTION = "Wooden aether-crystal supply crate prop."
 FBX_PATH = os.path.join(EXPORT_DIR, "Crate.fbx")
