@@ -1,0 +1,19 @@
+# Blender
+*.blend1
+*.blend2
+*.blend[0-9][0-9]
+*.blend@
+blender_crash.txt
+
+# exports/ is NOT ignored: publish_asset.py tags a commit as a versioned
+# artifact, and Unity's Package Manager pulls exports/<Group>/<Asset>/ at
+# that tag over git - the tag is meaningless unless that content is actually
+# committed. See docs/artifact-pipeline.md.
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc

@@ -1,0 +1,38 @@
+{
+  "scene": "crate",
+  "formats": [
+    "fbx"
+  ],
+  "coordinate_system": "Y-up, -Z forward; one exported unit is one meter",
+  "integration": {
+    "title": "Crate Integration",
+    "summary": "Simple wooden aether-crystal supply crate. Pipeline proof-of-concept asset - modeled, textured, and exported headlessly from Blender.",
+    "asset_type": "static_prop",
+    "placement": "Place anywhere crates make sense (cargo hold, bow deck near the existing JerryCanSupply crate). Single static mesh, no moving parts.",
+    "nodes": [
+      {
+        "name": "Crate",
+        "role": "The entire prop; one static mesh."
+      }
+    ],
+    "setup_steps": [
+      "Import without a rig or animation clips.",
+      "Add a box collider matching the mesh bounds.",
+      "Assign the URP/Lit shader to the imported material and confirm Crate_BaseColor.png is on Base Map; Crate_Roughness.png is authored as a plain grayscale roughness map (not yet packed into a Metallic/Smoothness alpha channel - repack or wire a Smoothness slot mapped from inverted roughness if the target shader wants smoothness instead); Crate_Bump.png is a grayscale height map (non-color) - wire it into a Bump/Height slot if the target shader has one, otherwise it can be skipped."
+    ],
+    "collision": "Single box collider matching the mesh bounds."
+  },
+  "bundles": [
+    {
+      "file": "Crate.fbx",
+      "format": "fbx",
+      "description": "Static wooden crate, single mesh, three baked textures (base color + roughness + bump).",
+      "meters_per_source_unit": 1.0,
+      "source_collections": [],
+      "source_objects": [
+        "Crate"
+      ],
+      "exported_object_count": 1
+    }
+  ]
+}

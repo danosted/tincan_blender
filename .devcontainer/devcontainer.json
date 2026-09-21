@@ -1,0 +1,36 @@
+{
+  "name": "TinCan Blender Pipeline",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {}
+  },
+  "postCreateCommand": "npm install -g @anthropic-ai/claude-code",
+  "postStartCommand": "bash .devcontainer/start-blender-mcp.sh && bash .devcontainer/start-keyring.sh",
+  "remoteUser": "vscode",
+  "mounts": [
+    // Unity Editor installs (~8GB+) - by far the most expensive thing to redo
+    // per container. Named volumes survive a container rebuild even though
+    // they're outside the image and outside the repo's bind mount.
+    "source=tincan-blender-unity-editors,target=/home/vscode/Unity,type=volume",
+    // Unity Hub/CLI settings + its own download cache (avoids re-downloading
+    // installers even when an editor version itself needs reinstalling).
+    "source=tincan-blender-unity-hub-config,target=/home/vscode/.config/unityhub,type=volume",
+    // Unity license file (.config/unity3d) and per-user prefs
+    // (.local/share/unity3d) - without these, `unity license status` goes
+    // back to "none active" every rebuild even though sign-in persisted.
+    "source=tincan-blender-unity3d-config,target=/home/vscode/.config/unity3d,type=volume",
+    "source=tincan-blender-unity3d-share,target=/home/vscode/.local/share/unity3d,type=volume",
+    // gnome-keyring's actual secret storage - this is what `unity auth login`
+    // persists into (see start-keyring.sh). Without it, sign-in is lost too.
+    "source=tincan-blender-keyrings,target=/home/vscode/.local/share/keyrings,type=volume"
+  ],
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "anthropic.claude-code"
+      ]
+    }
+  }
+}

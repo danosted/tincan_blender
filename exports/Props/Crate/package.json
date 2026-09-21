@@ -1,0 +1,7 @@
+{
+  "name": "com.tincan.props.crate",
+  "version": "0.1.0",
+  "displayName": "Crate (Aether Crystal Supply)",
+  "description": "Wooden aether-crystal supply crate prop.",
+  "unity": "6000.4"
+}
