@@ -22,3 +22,8 @@ __pycache__/
 # Unity as a git URL). build_kid.py and character_lab.py write into it from
 # here; commit and tag inside packages/com.tincan.characters/.
 packages/com.tincan.characters/
+
+# Review panels and the generated board: regenerable from the build scripts
+# (renders/*_sheet.png + _report.json stay committed as the history).
+renders/review/*/v*/
+renders/review/*/board.html
