@@ -8,6 +8,9 @@ navigable player airship to replace the current placeholder ship prop.
 Setting/style reference: [docs/airship-design.md](docs/airship-design.md).
 Concrete scale/fixture constraints pulled from the game:
 [docs/unity-integration.md](docs/unity-integration.md).
+Shipyard parts (modular 1 m grid hull pieces) follow
+[docs/part-contract.md](docs/part-contract.md); open questions for the Unity
+side are in [docs/unity-requirements.md](docs/unity-requirements.md).
 
 ## Blender MCP setup
 

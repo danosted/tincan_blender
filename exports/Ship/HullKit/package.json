@@ -1,0 +1,7 @@
+{
+  "name": "com.tincan.ship.hullkit",
+  "version": "0.1.0",
+  "displayName": "Hull Kit (Shipyard Parts)",
+  "description": "Modular 1 m grid airship hull parts sharing one texture atlas.",
+  "unity": "6000.4"
+}

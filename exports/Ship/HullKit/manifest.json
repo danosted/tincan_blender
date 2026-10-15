@@ -1,0 +1,111 @@
+{
+  "scene": "hull_kit",
+  "formats": [
+    "fbx"
+  ],
+  "coordinate_system": "Y-up, +Z is the bow (Unity forward), +X starboard; one exported unit is one meter",
+  "contract": "docs/part-contract.md",
+  "grid": {
+    "cell_size": 1.0,
+    "pivot": "centre of the bottom face of cell [0,0,0]",
+    "cell_bounds": "cell [i,j,k] spans x i-0.5..i+0.5, y j..j+1, z k-0.5..k+0.5 in part space"
+  },
+  "material": {
+    "name": "M_HullAtlas",
+    "base_map": "HullAtlas_BaseColor.png",
+    "shared_by": [
+      "Deck_1x1x1",
+      "HullSide_1x1x1"
+    ]
+  },
+  "parts": [
+    {
+      "name": "Deck_1x1x1",
+      "file": "Deck_1x1x1.fbx",
+      "category": "structure",
+      "size": [
+        1,
+        1,
+        1
+      ],
+      "cells": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "walkable_top": 1.0,
+      "faces": {
+        "+X": "deck",
+        "-X": "deck",
+        "+Z": "deck",
+        "-Z": "deck",
+        "+Y": "open",
+        "-Y": "open"
+      },
+      "triangles": 24,
+      "sockets": [],
+      "colliders": [
+        {
+          "name": "COL_Box_01",
+          "type": "box",
+          "center": [
+            0.0,
+            0.95,
+            0.0
+          ],
+          "size": [
+            1.0,
+            0.1,
+            1.0
+          ]
+        }
+      ]
+    },
+    {
+      "name": "HullSide_1x1x1",
+      "file": "HullSide_1x1x1.fbx",
+      "category": "structure",
+      "size": [
+        1,
+        1,
+        1
+      ],
+      "cells": [
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      "walkable_top": null,
+      "faces": {
+        "+X": "outboard",
+        "-X": "inboard",
+        "+Z": "hull",
+        "-Z": "hull",
+        "+Y": "hull",
+        "-Y": "hull"
+      },
+      "triangles": 56,
+      "sockets": [],
+      "colliders": [
+        {
+          "name": "COL_Box_01",
+          "type": "box",
+          "center": [
+            -0.445,
+            0.5,
+            0.0
+          ],
+          "size": [
+            0.11,
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    }
+  ]
+}
