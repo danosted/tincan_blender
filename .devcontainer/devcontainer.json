@@ -24,8 +24,15 @@
     "source=tincan-blender-unity3d-share,target=/home/vscode/.local/share/unity3d,type=volume",
     // gnome-keyring's actual secret storage - this is what `unity auth login`
     // persists into (see start-keyring.sh). Without it, sign-in is lost too.
-    "source=tincan-blender-keyrings,target=/home/vscode/.local/share/keyrings,type=volume"
+    "source=tincan-blender-keyrings,target=/home/vscode/.local/share/keyrings,type=volume",
+    // Claude Code's login (.credentials.json), settings, and memory. Paired
+    // with CLAUDE_CONFIG_DIR below so ~/.claude.json lands in here too instead
+    // of in the unpersisted home dir - otherwise every rebuild means /login.
+    "source=tincan-blender-claude,target=/home/vscode/.claude,type=volume"
   ],
+  "containerEnv": {
+    "CLAUDE_CONFIG_DIR": "/home/vscode/.claude"
+  },
   "customizations": {
     "vscode": {
       "extensions": [

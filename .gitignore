@@ -17,3 +17,8 @@ Thumbs.db
 # Python
 __pycache__/
 *.pyc
+
+# The character package is its own git repo (pushed to GitHub and consumed by
+# Unity as a git URL). build_kid.py and character_lab.py write into it from
+# here; commit and tag inside packages/com.tincan.characters/.
+packages/com.tincan.characters/

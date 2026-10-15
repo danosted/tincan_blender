@@ -27,7 +27,11 @@ echo "export DBUS_SESSION_BUS_ADDRESS='${DBUS_ADDR}'" > "$ENV_FILE"
 
 # shellcheck disable=SC1090
 source "$ENV_FILE"
-echo -n "" | gnome-keyring-daemon --unlock --components=secrets 2>&1 \
+# The password must be a newline, not empty input: with nothing on stdin the
+# daemon treats it as "no password given" and never creates the persistent
+# login keyring, so `unity auth login` fails with KEYRING_WRITE_FAILED (only
+# the in-memory "session" collection exists, and it isn't the default alias).
+printf '\n' | gnome-keyring-daemon --unlock --components=secrets 2>&1 \
     | grep '^[A-Z_]*=' | sed 's/^/export /' >> "$ENV_FILE"
 
 if ! grep -qF "$ENV_FILE" "${HOME}/.bashrc" 2>/dev/null; then

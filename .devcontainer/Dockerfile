@@ -76,9 +76,13 @@ RUN curl -sL https://hub.unity3d.com/linux/keys/public | gpg --dearmor -o /usr/s
 # registers on. The daemon itself is started at container-start time (it's a
 # running process, not something that belongs in an image layer) by
 # start-keyring.sh.
+# xvfb: a virtual display, so batchmode Unity can render the play-mode test
+# captures (scripts/cli/character_lab.py test).
 RUN apt-get update && apt-get install -y --no-install-recommends \
         gnome-keyring \
         dbus-x11 \
+        xvfb \
+        xauth \
     && rm -rf /var/lib/apt/lists/*
 
 # Install and enable the official Blender MCP add-on (Blender Lab extensions
@@ -87,5 +91,16 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN blender --background --online-mode --command extension repo-add lab_blender_org --url https://lab.blender.org/ \
     && blender --background --online-mode --command extension install lab_blender_org.mcp --sync --enable \
     && chmod -R a+rwX "${BLENDER_USER_RESOURCES}"
+
+# Mount points for the Unity/keyring/Claude named volumes in devcontainer.json.
+# Docker copies a mount point's ownership into a *new, empty* named volume;
+# without these the volumes are created root-owned, the `vscode` user can't
+# write to them, and Unity (editor, sign-in, license) silently vanishes after
+# a rebuild with fresh volumes.
+RUN mkdir -p /home/vscode/Unity /home/vscode/.config/unityhub /home/vscode/.config/unity3d \
+        /home/vscode/.local/share/unity3d /home/vscode/.local/share/keyrings \
+        /home/vscode/.claude \
+    && chown -R vscode:vscode /home/vscode/Unity /home/vscode/.config /home/vscode/.local \
+        /home/vscode/.claude
 
 WORKDIR /workspace
